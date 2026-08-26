@@ -1,1 +1,29 @@
-<script>location.href="https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson";</script>
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "ADMIN": "India" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[68.1, 7.9], [97.4, 7.9], [97.4, 35.5], [68.1, 35.5], [68.1, 7.9]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ADMIN": "Hong Kong" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[113.8, 22.1], [114.4, 22.1], [114.4, 22.6], [113.8, 22.6], [113.8, 22.1]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ADMIN": "Europe" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-10.0, 35.0], [40.0, 35.0], [40.0, 70.0], [-10.0, 70.0], [-10.0, 35.0]]]
+      }
+    }
+  ]
+}

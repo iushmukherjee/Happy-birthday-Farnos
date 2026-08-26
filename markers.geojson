@@ -3,16 +3,16 @@
   "features": [
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [88.3615, 22.7565] },
+      "geometry": { "type": "Point", "coordinates": [88.3929806, 22.7665838] },
       "properties": {
-        "title": "Leora Stay",
+        "title": "Farnos's Home",
         "subtitle": "Barrackpore",
-        "url": "./leora-stay.html"
+        "url": "./farness-home.html"
       }
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [88.4795, 22.7212] },
+      "geometry": { "type": "Point", "coordinates": [88.472396, 22.702354] },
       "properties": {
         "title": "Star Mall",
         "subtitle": "Barasat",
@@ -21,7 +21,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [88.4357, 22.7483] },
+      "geometry": { "type": "Point", "coordinates": [88.456586, 22.738344] },
       "properties": {
         "title": "Adamas University",
         "subtitle": "Barasat-Barrackpore Road",
@@ -48,4 +48,3 @@
     }
   ]
 }
-

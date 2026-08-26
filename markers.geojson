@@ -30,6 +30,24 @@
     },
     {
       "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [77.5946, 12.9716] },
+      "properties": {
+        "title": "Bangalore",
+        "subtitle": "Karnataka",
+        "url": "./bangalore.html"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [78.4867, 17.3850] },
+      "properties": {
+        "title": "Hyderabad",
+        "subtitle": "Telangana",
+        "url": "./hyderabad.html"
+      }
+    },
+    {
+      "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [114.1694, 22.3193] },
       "properties": {
         "title": "Hong Kong",

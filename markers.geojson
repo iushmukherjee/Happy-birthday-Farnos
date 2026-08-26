@@ -3,7 +3,7 @@
   "features": [
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [88.3658, 22.7606] },
+      "geometry": { "type": "Point", "coordinates": [88.3615, 22.7565] },
       "properties": {
         "title": "Leora Stay",
         "subtitle": "Barrackpore",
@@ -12,7 +12,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [88.4812, 22.7214] },
+      "geometry": { "type": "Point", "coordinates": [88.4795, 22.7212] },
       "properties": {
         "title": "Star Mall",
         "subtitle": "Barasat",
@@ -21,7 +21,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [88.4594, 22.7486] },
+      "geometry": { "type": "Point", "coordinates": [88.4357, 22.7483] },
       "properties": {
         "title": "Adamas University",
         "subtitle": "Barasat-Barrackpore Road",
@@ -48,3 +48,4 @@
     }
   ]
 }
+

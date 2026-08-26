@@ -2,62 +2,138 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <title>Birthday Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bangalore 🌆</title>
+  
+  <!-- MapLibre GL JS Library & CSS -->
+  <script src="https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.js"></script>
+  <link href="https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.css" rel="stylesheet" />
   
   <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #fff5f7;
-      color: #333;
-      text-align: center;
+    body { 
+      margin: 0; 
+      padding: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    #map { 
+      position: absolute; 
+      top: 0; 
+      bottom: 0; 
+      width: 100%; 
     }
 
-    .card {
-      max-width: 450px;
-      margin: 30px auto;
-      background: #ffffff;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    /* Extra large popup card styling */
+    .maplibregl-popup-content {
+      padding: 24px 20px 20px 20px !important;
+      border-radius: 18px !important;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+      width: 260px !important;
     }
 
-    h1 {
-      color: #ff3366;
-      font-size: 24px;
-      margin-bottom: 12px;
+    .maplibregl-popup-close-button {
+      font-size: 26px !important;
+      padding: 6px 12px !important;
+      color: #888 !important;
     }
-
-    p {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #555;
-    }
-
-    .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #ff3366;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 14px;
+    
+    .maplibregl-popup-close-button:hover {
+      color: #111 !important;
+      background: transparent !important;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>Bangalore 🌆</h1>
-    <p>Happy Birthday! 🎂✨</p>
-    <p>Write your special birthday note or memory here!</p>
+<div id="map"></div>
 
-    <a href="./index.html" class="back-btn">&larr; Back to Map</a>
-  </div>
+<script>
+  // 1. Initialize Map centered on India (so Kolkata, Bangalore, and Hyderabad are visible)
+  const map = new maplibregl.Map({
+    container: 'map',
+    style: {
+      version: 8,
+      sources: {
+        'osm-tiles': {
+          type: 'raster',
+          tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+          tileSize: 256,
+          attribution: '&copy; OpenStreetMap contributors'
+        }
+      },
+      layers: [
+        {
+          id: 'osm-layer',
+          type: 'raster',
+          source: 'osm-tiles'
+        }
+      ]
+    },
+    center: [82.0000, 20.0000],
+    zoom: 5
+  });
+
+  map.on('load', () => {
+    // 2. Load Your Birthday Markers (with cache-busting query parameter)
+    map.addSource('birthday-pins', {
+      type: 'geojson',
+      data: './markers.geojson?v=4'
+    });
+
+    // Big Red Pin Dots
+    map.addLayer({
+      id: 'pins-layer',
+      type: 'circle',
+      source: 'birthday-pins',
+      paint: {
+        'circle-radius': 14,
+        'circle-color': '#ff3366',
+        'circle-stroke-width': 3,
+        'circle-stroke-color': '#ffffff'
+      }
+    });
+
+    // Pin Text Labels
+    map.addLayer({
+      id: 'pins-labels',
+      type: 'symbol',
+      source: 'birthday-pins',
+      layout: {
+        'text-field': ['get', 'title'],
+        'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+        'text-radial-offset': 1.2,
+        'text-size': 14
+      },
+      paint: {
+        'text-color': '#111111',
+        'text-halo-color': '#ffffff',
+        'text-halo-width': 2
+      }
+    });
+
+    // 3. Tap Pin -> Open Large Popup Card
+    map.on('click', 'pins-layer', (e) => {
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const { title, subtitle, url } = e.features[0].properties;
+
+      new maplibregl.Popup({ maxWidth: '320px', offset: 15 })
+        .setLngLat(coordinates)
+        .setHTML(`
+          <div style="text-align: center; font-family: sans-serif;">
+            <strong style="font-size: 24px; font-weight: 800; color: #111; display: block; margin-bottom: 6px; line-height: 1.2;">${title}</strong>
+            <span style="font-size: 15px; color: #666; display: block; margin-bottom: 18px;">${subtitle || ''}</span>
+            <a href="${url}" style="background-color: #ff3366; color: white; padding: 12px 22px; text-decoration: none; border-radius: 10px; font-size: 16px; font-weight: bold; display: inline-block; width: 80%; box-shadow: 0 4px 10px rgba(255, 51, 102, 0.3);">
+              Open Page &rarr;
+            </a>
+          </div>
+        `)
+        .addTo(map);
+    });
+
+    // Pointer Cursor Effects
+    map.on('mouseenter', 'pins-layer', () => { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'pins-layer', () => { map.getCanvas().style.cursor = ''; });
+  });
+</script>
 
 </body>
 </html>

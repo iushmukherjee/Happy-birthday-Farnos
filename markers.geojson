@@ -1,0 +1,50 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [88.3658, 22.7606] },
+      "properties": {
+        "title": "Leora Stay",
+        "subtitle": "Barrackpore",
+        "url": "./leora-stay.html"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [88.4812, 22.7214] },
+      "properties": {
+        "title": "Star Mall",
+        "subtitle": "Barasat",
+        "url": "./star-mall.html"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [88.4594, 22.7486] },
+      "properties": {
+        "title": "Adamas University",
+        "subtitle": "Barasat-Barrackpore Road",
+        "url": "./adamas-university.html"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.1694, 22.3193] },
+      "properties": {
+        "title": "Hong Kong",
+        "subtitle": "Special Administrative Region",
+        "url": "./hong-kong.html"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [8.2275, 46.8182] },
+      "properties": {
+        "title": "Switzerland",
+        "subtitle": "Europe",
+        "url": "./switzerland.html"
+      }
+    }
+  ]
+}

@@ -7,16 +7,16 @@
       "properties": {
         "title": "Farnos's Home",
         "subtitle": "Barrackpore",
-        "url": "./farness-home.html"
+        "url": "./farnos-home.html"
       }
     },
     {
       "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [88.472396, 22.702354] },
       "properties": {
-        "title": "Star Mall",
+        "title": "Ayush's Home",
         "subtitle": "Barasat",
-        "url": "./star-mall.html"
+        "url": "./ayush-home.html"
       }
     },
     {

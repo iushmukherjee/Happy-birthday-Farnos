@@ -28,7 +28,7 @@
 <div id="map"></div>
 
 <script>
-  // 1. Initialize Map with clean OpenStreetMap background (No grey boxes!)
+  // Initialize Map
   const map = new maplibregl.Map({
     container: 'map',
     style: {
@@ -49,31 +49,31 @@
         }
       ]
     },
-    center: [50, 25],
-    zoom: 2.5
+    center: [88.4200, 22.7400], // Centered around Barrackpore / Barasat
+    zoom: 11
   });
 
   map.on('load', () => {
-    // 2. Load Your Birthday Markers
+    // Load Birthday Markers
     map.addSource('birthday-pins', {
       type: 'geojson',
       data: './markers.geojson'
     });
 
-    // Red Pin Dots
+    // BIGGER Red Pin Dots
     map.addLayer({
       id: 'pins-layer',
       type: 'circle',
       source: 'birthday-pins',
       paint: {
-        'circle-radius': 8,
+        'circle-radius': 14,             // Increased pin size (was 8)
         'circle-color': '#ff3366',
-        'circle-stroke-width': 2,
+        'circle-stroke-width': 3,        // Thicker white border
         'circle-stroke-color': '#ffffff'
       }
     });
 
-    // Text Labels Next to Pins
+    // Pin Text Labels
     map.addLayer({
       id: 'pins-labels',
       type: 'symbol',
@@ -81,8 +81,8 @@
       layout: {
         'text-field': ['get', 'title'],
         'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
-        'text-radial-offset': 1,
-        'text-size': 12
+        'text-radial-offset': 1.2,
+        'text-size': 14                  // Slightly larger label text
       },
       paint: {
         'text-color': '#111111',
@@ -91,7 +91,7 @@
       }
     });
 
-    // 3. Click Handler (Tap Pin -> Open Popup with Link)
+    // Tap Pin -> Open Popup
     map.on('click', 'pins-layer', (e) => {
       const coordinates = e.features[0].geometry.coordinates.slice();
       const { title, subtitle, url } = e.features[0].properties;
@@ -99,10 +99,10 @@
       new maplibregl.Popup()
         .setLngLat(coordinates)
         .setHTML(`
-          <div style="text-align: center; padding: 6px;">
-            <strong style="font-size: 15px; color: #111;">${title}</strong><br/>
-            <span style="font-size: 12px; color: #666;">${subtitle || ''}</span><br/><br/>
-            <a href="${url}" style="background-color: #ff3366; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 12px; display: inline-block;">
+          <div style="text-align: center; padding: 8px;">
+            <strong style="font-size: 16px; color: #111;">${title}</strong><br/>
+            <span style="font-size: 13px; color: #666;">${subtitle || ''}</span><br/><br/>
+            <a href="${url}" style="background-color: #ff3366; color: white; padding: 8px 14px; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: bold; display: inline-block;">
               Open Page &rarr;
             </a>
           </div>
@@ -110,7 +110,7 @@
         .addTo(map);
     });
 
-    // Pointer Cursor Effects
+    // Pointer Cursor
     map.on('mouseenter', 'pins-layer', () => { map.getCanvas().style.cursor = 'pointer'; });
     map.on('mouseleave', 'pins-layer', () => { map.getCanvas().style.cursor = ''; });
   });
